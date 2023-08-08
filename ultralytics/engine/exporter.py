@@ -292,7 +292,7 @@ class Exporter:
         if self.args.optimize:  # https://pytorch.org/tutorials/recipes/mobile_interpreter.html
             LOGGER.info(f'{prefix} optimizing for mobile...')
             from torch.utils.mobile_optimizer import optimize_for_mobile
-            optimize_for_mobile(ts)._save_for_lite_interpreter(str(f), _extra_files=extra_files)
+            optimize_for_mobile(ts, backend="metal")._save_for_lite_interpreter(str(f), _extra_files=extra_files)
         else:
             ts.save(str(f), _extra_files=extra_files)
         return f, None
